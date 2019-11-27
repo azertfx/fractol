@@ -6,7 +6,7 @@
 #    By: anabaoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/20 01:58:59 by anabaoui          #+#    #+#              #
-#    Updated: 2019/11/20 02:00:13 by anabaoui         ###   ########.fr        #
+#    Updated: 2019/11/27 03:05:59 by anabaoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fractol
 
 SRC_PATH = src
 
-SRC_NAME = main.c fractol.c
+SRC_NAME = main.c fractol.c keys_hook.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
