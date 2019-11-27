@@ -6,7 +6,7 @@
 /*   By: anabaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 02:10:11 by anabaoui          #+#    #+#             */
-/*   Updated: 2019/11/24 06:43:44 by anabaoui         ###   ########.fr       */
+/*   Updated: 2019/11/27 01:21:31 by anabaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # include "../libft/libft.h"
 # include "../miniLibX/mlx.h"
 
-# define IMG_W 700
-# define IMG_H 700
+# define IMG_W 1000
+# define IMG_H 1000
 
 typedef struct	s_var
 {
