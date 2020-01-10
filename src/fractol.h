@@ -6,7 +6,7 @@
 /*   By: anabaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 02:10:11 by anabaoui          #+#    #+#             */
-/*   Updated: 2019/11/27 04:11:04 by anabaoui         ###   ########.fr       */
+/*   Updated: 2020/01/10 12:39:38 by anabaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 # define IMG_W 800
 # define IMG_H 800
 
-typedef struct	s_axes
-{
-	int		i;
-	int		j;
-}				t_axes;
-
 typedef struct	s_coor
 {
 	float	x;
@@ -33,10 +27,10 @@ typedef struct	s_coor
 typedef struct	s_var
 {
 	t_coor	mov;
-	t_axes	axes;
 	t_coor	coor;
+	t_coor	min;
+	t_coor	max;
 	int		itr;
-	float	dim;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;

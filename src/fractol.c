@@ -6,7 +6,7 @@
 /*   By: anabaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 02:08:52 by anabaoui          #+#    #+#             */
-/*   Updated: 2019/11/27 04:11:52 by anabaoui         ###   ########.fr       */
+/*   Updated: 2020/01/10 16:33:12 by anabaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,23 @@ int		check_iteration(int itr, float x, float y)
 void	go_draw(t_var v, char *str)
 {
 	int		res;
+	int 	i;
+	int		j;
 
 	printf("str = %s\n", str);
-	v.axes.j = 0;
-	while (v.axes.j < IMG_H)
+	j = 0;
+	while (j < IMG_H)
 	{
-		v.coor.y = v.dim - ((float)(v.axes.j * v.dim * 2 + v.mov.y) / (float)IMG_H);
-		v.axes.i = 0;
-		while (v.axes.i < IMG_W)
+		v.coor.y = j / (IMG_H / (v.max.y - v.min.y)) + v.min.y;
+		i = 0;
+		while (i < IMG_W)
 		{
-			v.coor.x = ((float)(v.axes.i * v.dim * 2 + v.mov.x) / (float)IMG_W) - v.dim;
+			v.coor.x = i / (IMG_W / (v.max.x - v.min.x)) + v.min.x;
 			res = check_iteration(v.itr, v.coor.x, v.coor.y);
-			v.img_data[(v.axes.j * IMG_W) + v.axes.i] = (res != v.itr) ? (res * 0x03d3fc) : 0x000000;
-			v.axes.i++;
+			v.img_data[(j * IMG_W) + i] = (res != v.itr) ? (res * 0x03d3fc) : 0x000000;
+			i++;
 		}
-		v.axes.j++;
+		j++;
 	}
 }
 
@@ -57,8 +59,11 @@ void	initialization(t_var *v)
 {
 	v->mov.x = 0;
 	v->mov.y = 0;
-	v->itr = 50;
-	v->dim = 2;
+	v->itr = 70;
+	v->min.x = -2;
+	v->min.y = -2;
+	v->max.x = 2;
+	v->max.y = 2;
 }
 
 void	fractol(char *str)
