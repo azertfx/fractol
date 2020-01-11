@@ -6,7 +6,7 @@
 /*   By: anabaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 03:04:50 by anabaoui          #+#    #+#             */
-/*   Updated: 2020/01/10 16:22:23 by anabaoui         ###   ########.fr       */
+/*   Updated: 2020/01/11 22:31:05 by anabaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,23 @@ void	clear_and_draw(t_var *v)
 
 void	zoom(t_var *v, int x, int y, float z)
 {
-	v->coor.y = v->max.y - (y * (v->max.y - v->min.y) / IMG_H);
-	v->coor.x = v->max.x - (x * (v->max.x - v->min.x) / IMG_W);
+	v->coor.y = (y * (v->max.y - v->min.y) / IMG_H) + v->min.y;
+	v->coor.x = (x * (v->max.x - v->min.x) / IMG_W) + v->min.x;
 	v->min.x = v->coor.x + (v->min.x - v->coor.x) * z;
 	v->min.y = v->coor.y + (v->min.y - v->coor.y) * z;
 	v->max.x = v->coor.x + (v->max.x - v->coor.x) * z;
 	v->max.y = v->coor.y + (v->max.y - v->coor.y) * z;
+}
+
+int		mouse_move(int x, int y, t_var *v)
+{
+	if (ft_strcmp(v->fractol, "julia") == 0 && v->stop_julia == 1)
+	{
+		v->jom.x = (y * (v->max.y - v->min.y) / IMG_H) + v->min.y;
+		v->jom.y = (x * (v->max.x - v->min.x) / IMG_W) + v->min.x;
+		clear_and_draw(v);
+	}
+	return (0);
 }
 
 int		mouse_hook(int m, int x, int y, t_var *v)
@@ -40,7 +51,7 @@ int		mouse_hook(int m, int x, int y, t_var *v)
 		printf("y = %i\n", y);
 	}
 	if (m == 1)
-		printf("left click\n");
+		v->stop_julia *= -1;
 	if (m == 2)
 		printf("right click\n");
 	if (m == 4)
@@ -62,13 +73,21 @@ int		keys_hook(int k, t_var *v)
 	if (k == 53)
 		exit(0);
 	else if (k == 124)
-		v->mov.x += 10;
+		v->move.x -= 10;
 	else if (k == 123)
-		v->mov.x -= 10;
+		v->move.x += 10;
 	else if (k == 126)
-		v->mov.y += 10;
+		v->move.y += 10;
 	else if (k == 125)
-		v->mov.y -= 10;
+		v->move.y -= 10;
+	else if (k == 69)
+		v->itr = (v->itr < 80) ? (v->itr + 1) : v->itr;
+	else if (k == 78)
+		v->itr = (v->itr > 1) ? (v->itr - 1) : 1;
+	else if (k == 8)
+		v->color += 0.5;
+	else if (k == 34)
+		initialization(v);
 	clear_and_draw(v);
 	printf("key = %i\n", k);
 	return (0);
