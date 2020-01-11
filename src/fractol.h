@@ -30,6 +30,7 @@ typedef struct	s_var
 	t_coor	coor;
 	t_coor	min;
 	t_coor	max;
+	char	*fractol;
 	int		itr;
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -43,6 +44,6 @@ typedef struct	s_var
 void	fractol(char *str);
 int		keys_hook(int k, t_var *v);
 int		mouse_hook(int m, int x, int y, t_var *v);
-void	go_draw(t_var v, char *str);
+void	go_draw(t_var v);
 
 #endif

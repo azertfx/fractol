@@ -32,26 +32,33 @@ int		check_iteration(int itr, float x, float y)
 	return (i);
 }
 
-void	go_draw(t_var v, char *str)
+void	go_draw(t_var v)
 {
 	int		res;
 	int 	i;
 	int		j;
 
-	printf("str = %s\n", str);
+	printf("str = %s\n", v.fractol);
+	if (ft_strcmp(v.fractol, "mandelbrot") == 0)
+	{	
 	j = 0;
 	while (j < IMG_H)
 	{
-		v.coor.y = j / (IMG_H / (v.max.y - v.min.y)) + v.min.y;
+		v.coor.y = v.max.y - (j * (v.max.y - v.min.y) / IMG_H);
 		i = 0;
 		while (i < IMG_W)
 		{
-			v.coor.x = i / (IMG_W / (v.max.x - v.min.x)) + v.min.x;
+			v.coor.x = (i * (v.max.x - v.min.x) / IMG_W) - v.max.x;
 			res = check_iteration(v.itr, v.coor.x, v.coor.y);
 			v.img_data[(j * IMG_W) + i] = (res != v.itr) ? (res * 0x03d3fc) : 0x000000;
 			i++;
 		}
 		j++;
+	}
+	}
+	else if (ft_strcmp(v.fractol, "julia") == 0)
+	{
+		printf("julia is here\n");
 	}
 }
 
@@ -76,7 +83,8 @@ void	fractol(char *str)
 	v.img_data = (int *)mlx_get_data_addr(v.img_ptr, &v.bpp,
 			&v.size_l, &v.endian);
 	initialization(&v);
-	go_draw(v, str);
+	v.fractol = str;
+	go_draw(v);
 	mlx_hook(v.win_ptr, 2, 1, keys_hook, &v);
 	mlx_mouse_hook(v.win_ptr, mouse_hook, &v);
 	mlx_put_image_to_window(v.mlx_ptr, v.win_ptr, v.img_ptr, 0, 0);
