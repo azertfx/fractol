@@ -6,7 +6,7 @@
 /*   By: anabaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 02:10:11 by anabaoui          #+#    #+#             */
-/*   Updated: 2020/01/11 16:50:01 by anabaoui         ###   ########.fr       */
+/*   Updated: 2020/01/12 17:11:19 by anabaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # include "../libft/libft.h"
 # include "../miniLibX/mlx.h"
 
-# define IMG_W 800
-# define IMG_H 800
+# define IMG_W 600
+# define IMG_H 600
 
 typedef struct	s_coor
 {

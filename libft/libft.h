@@ -6,7 +6,7 @@
 /*   By: anabaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/06 12:23:28 by anabaoui          #+#    #+#             */
-/*   Updated: 2020/01/11 21:35:19 by anabaoui         ###   ########.fr       */
+/*   Updated: 2020/01/12 15:57:29 by anabaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int				ft_count_words(char const *str, char c);
 int				first_spaces(char const *s);
 int				last_spaces(char const *s);
 void			strtolower(char *str);
-float				nbrtoabs(float nbr);
+float			nbrtoabs(float nbr);
+float			nbrpower(float nbr, int power);
 
 #endif

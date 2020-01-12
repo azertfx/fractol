@@ -6,11 +6,12 @@
 /*   By: anabaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 02:08:52 by anabaoui          #+#    #+#             */
-/*   Updated: 2020/01/11 22:38:49 by anabaoui         ###   ########.fr       */
+/*   Updated: 2020/01/12 17:12:21 by anabaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <math.h>
 #include <stdio.h>
 int		check_iteration(t_var v)
 {
@@ -22,7 +23,7 @@ int		check_iteration(t_var v)
 	real_nbr = v.coor.x;
 	img_nbr = v.coor.y;
 	i = 1;
-	if (ft_strcmp(v.fractol, "mandelbrot") == 0 || ft_strcmp(v.fractol, "ship") == 0)
+	if (ft_strcmp(v.fractol, "mandelbrot") == 0 || ft_strcmp(v.fractol, "ship") == 0 || ft_strcmp(v.fractol, "quatro") == 0 || ft_strcmp(v.fractol, "penta") == 0)
 	{
 		v.jom.x = v.coor.x;
 		v.jom.y = v.coor.y;
@@ -30,9 +31,18 @@ int		check_iteration(t_var v)
 	while ((i < v.itr) && ((real_nbr * real_nbr + img_nbr * img_nbr) <= 4))
 	{
 		old_real_nbr = real_nbr;
-		real_nbr = (real_nbr * real_nbr) - (img_nbr * img_nbr) + v.jom.x;
-		if (ft_strcmp(v.fractol,"ship") == 0)
+		if (ft_strcmp(v.fractol, "quatro") == 0)
+			real_nbr = pow(real_nbr, 5) - 10 * pow(real_nbr, 3) * pow(img_nbr, 2) + 5 * real_nbr * pow(img_nbr, 4) + v.jom.x;
+		else if (ft_strcmp(v.fractol, "penta") == 0)
+			real_nbr = pow(real_nbr, 6) - pow(img_nbr, 6) + 15 * pow(real_nbr, 2) * pow(img_nbr, 4) - pow(img_nbr, 2) * pow(real_nbr, 4) - 14 * pow(real_nbr, 4) * pow(img_nbr, 2) + v.jom.x;
+		else
+			real_nbr = (real_nbr * real_nbr) - (img_nbr * img_nbr) + v.jom.x;
+		if (ft_strcmp(v.fractol, "ship") == 0)
 			img_nbr = nbrtoabs(2 * old_real_nbr * img_nbr) + v.jom.y;
+		else if (ft_strcmp(v.fractol, "quatro") == 0)
+			img_nbr = 5 * pow(old_real_nbr, 4) * img_nbr - 10 * pow(old_real_nbr, 2) * pow(img_nbr, 3) + pow(img_nbr, 5) + v.jom.y;
+		else if (ft_strcmp(v.fractol, "penta") == 0)
+			img_nbr = 6 * pow(old_real_nbr, 5) * img_nbr - 20 * pow(old_real_nbr, 3) * pow(img_nbr, 3) + 6 * old_real_nbr * pow(img_nbr, 5) + v.jom.y;
 		else
 			img_nbr = 2 * old_real_nbr * img_nbr + v.jom.y;
 		i++;
@@ -66,7 +76,7 @@ void	initialization(t_var *v)
 {
 	v->move.x = 0;
 	v->move.y = 0;
-	v->itr = 60;
+	v->itr = 50;
 	v->min.x = -2;
 	v->min.y = -2;
 	v->max.x = 2;
