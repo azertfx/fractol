@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
-
+#include <stdio.h>
 void	clear_and_draw(t_var *v)
 {
+	printf("sssss\n");
 	mlx_destroy_image(v->mlx_ptr, v->img_ptr);
 	v->img_ptr = mlx_new_image(v->mlx_ptr, IMG_W, IMG_H);
 	mlx_clear_window(v->mlx_ptr, v->win_ptr);

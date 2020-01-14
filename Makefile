@@ -25,7 +25,7 @@ OBJ = $(addprefix $(SRC_PATH)/,$(OBJ_NAME))
 
 CC = gcc -Wall -Wextra -Werror
 
-LIB = -L ./libft -lft -lmlx -framework OpenGL -framework AppKit
+LIB = -L ./libft -lft -lpthread -L ./miniLibX -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 

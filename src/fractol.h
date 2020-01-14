@@ -13,10 +13,12 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # include "../libft/libft.h"
-# include "mlx.h"
+# include "../miniLibX/mlx.h"
+# include <pthread.h>
 
 # define IMG_W 600
 # define IMG_H 600
+# define THREADS 4
 
 typedef struct	s_coor
 {
@@ -35,6 +37,8 @@ typedef struct	s_var
 	int		stop_julia;
 	char	*fractol;
 	int		itr;
+	int	t_start;
+	int	t_end;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
@@ -53,7 +57,7 @@ void	initialization(t_var *v);
 void	mandelbrot(t_var v);
 void	julia(t_var v);
 void	ship(t_var v);
-void	quatro(t_var v);
+void	*quatro(void *v);
 void	penta(t_var v);
 
 #endif
