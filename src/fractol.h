@@ -6,7 +6,7 @@
 /*   By: anabaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 02:10:11 by anabaoui          #+#    #+#             */
-/*   Updated: 2020/01/14 15:14:37 by anabaoui         ###   ########.fr       */
+/*   Updated: 2020/01/14 18:50:31 by anabaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct	s_var
 	int		stop_julia;
 	char	*fractol;
 	int		itr;
+	int	t_start;
+	int	t_end;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
@@ -56,7 +58,7 @@ void	initialization(t_var *v);
 void	mandelbrot(t_var v);
 void	julia(t_var v);
 void	ship(t_var v);
-void	quatro(t_var v);
+void	*quatro(void *v);
 void	penta(t_var v);
 
 #endif

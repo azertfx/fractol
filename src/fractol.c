@@ -11,19 +11,39 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
-
 void	go_draw(t_var v)
 {
-	if (ft_strcmp(v.fractol, "mandelbrot") == 0)
-		mandelbrot(v);
-	else if (ft_strcmp(v.fractol, "julia") == 0)
-		julia(v);
-	else if (ft_strcmp(v.fractol, "ship") == 0)
-		ship(v);
-	else if (ft_strcmp(v.fractol, "quatro") == 0)
-		quatro(v);
-	else
-		penta(v);
+	t_var		t[THREADS];
+	pthread_t	id[THREADS];
+	int		i;
+
+	i = 0;
+	v.t_start = 0;
+	v.t_end = 0;
+	while (i < THREADS)
+	{
+		t[i] = v;
+		t[i].t_start = v.t_start;
+		t[i].t_end = IMG_H / THREADS + v.t_start;
+		//if (ft_strcmp(v.fractol, "mandelbrot") == 0)
+		//	pthread_create(&id[i], NULL, mandelbrot(v), t[i]);
+		//else if (ft_strcmp(v.fractol, "julia") == 0)
+		//	pthread_create(&id[i], NULL, julia(v), t[i]);
+		//else if (ft_strcmp(v.fractol, "ship") == 0)
+		//	pthread_create(&id[i], NULL, ship(v), t[i]);
+		if (ft_strcmp(v.fractol, "quatro") == 0)
+			pthread_create(&id[i], NULL, quatro, (void *)&t[i]);
+		//else
+		//	pthread_create(&id[i], NULL, penta(v), t[i]);
+		v.t_start = t[i].t_end;
+		i++;
+	}
+	i = 0;
+	while (i < THREADS)
+	{
+		pthread_join(id[i], NULL);
+		i++;
+	}
 }
 
 void	initialization(t_var *v)
