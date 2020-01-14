@@ -6,7 +6,7 @@
 /*   By: anabaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 02:10:11 by anabaoui          #+#    #+#             */
-/*   Updated: 2020/01/13 18:04:40 by anabaoui         ###   ########.fr       */
+/*   Updated: 2020/01/14 15:14:37 by anabaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define FRACTOL_H
 # include "../libft/libft.h"
 # include "mlx.h"
+# include <pthread.h>
 
 # define IMG_W 600
 # define IMG_H 600
+# define THREADS 4
 
 typedef struct	s_coor
 {
@@ -31,6 +33,7 @@ typedef struct	s_var
 	t_coor	min;
 	t_coor	max;
 	t_coor	julia;
+	t_coor	thread;
 	float	color;
 	int		stop_julia;
 	char	*fractol;

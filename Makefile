@@ -6,7 +6,7 @@
 #    By: anabaoui <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/20 01:58:59 by anabaoui          #+#    #+#              #
-#    Updated: 2020/01/13 18:06:10 by anabaoui         ###   ########.fr        #
+#    Updated: 2020/01/14 15:11:56 by anabaoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJ = $(addprefix $(SRC_PATH)/,$(OBJ_NAME))
 
 CC = gcc -Wall -Wextra -Werror
 
-LIB = -L ./libft -lft -lmlx -framework OpenGL -framework AppKit
+LIB = -L ./libft -lft -lpthread -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
