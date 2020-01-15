@@ -11,21 +11,21 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
+
 void	clear_and_draw(t_var *v)
 {
-	printf("sssss\n");
 	mlx_destroy_image(v->mlx_ptr, v->img_ptr);
 	v->img_ptr = mlx_new_image(v->mlx_ptr, IMG_W, IMG_H);
 	mlx_clear_window(v->mlx_ptr, v->win_ptr);
+	instruction(v);
 	go_draw(*v);
-	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->img_ptr, 0, 0);
+	mlx_put_image_to_window(v->mlx_ptr, v->win_ptr, v->img_ptr, 210, 0);
 }
 
 void	zoom(t_var *v, int x, int y, float z)
 {
 	v->coor.y = (y * (v->max.y - v->min.y) / IMG_H) + v->min.y;
-	v->coor.x = (x * (v->max.x - v->min.x) / IMG_W) + v->min.x;
+	v->coor.x = ((x - 210) * (v->max.x - v->min.x) / IMG_W) + v->min.x;
 	v->min.x = v->coor.x + (v->min.x - v->coor.x) * z;
 	v->min.y = v->coor.y + (v->min.y - v->coor.y) * z;
 	v->max.x = v->coor.x + (v->max.x - v->coor.x) * z;

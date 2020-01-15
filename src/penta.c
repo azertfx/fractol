@@ -32,24 +32,27 @@ int		penta_itr(t_var v)
 	return (i);
 }
 
-void    penta(t_var v)
+void    *penta(void *v)
 {
-	int itr;
-	int i;
-	int j;
+	int 	itr;
+	int 	i;
+	int 	j;
+	t_var	*t;
 
-	j = 0;
-	while (j < IMG_H)
+	t = (void *)v;
+	j = t->t_start;
+	while (j < t->t_end)
 	{
-		v.coor.y = ((j + v.move.y) * (v.max.y - v.min.y) / IMG_H) + v.min.y;
+		t->coor.y = ((j + t->move.y) * (t->max.y - t->min.y) / IMG_H) + t->min.y;
 		i = 0;
 		while (i < IMG_W)
 		{
-			v.coor.x = ((i + v.move.x) * (v.max.x - v.min.x) / IMG_W) + v.min.x;
-			itr = penta_itr(v);
-			v.img_data[(j * IMG_W) + i] = (itr != v.itr) ? (itr * 0x03d3fc * v.color) : 0x000000;
+			t->coor.x = ((i + t->move.x) * (t->max.x - t->min.x) / IMG_W) + t->min.x;
+			itr = penta_itr(*t);
+			t->img_data[(j * IMG_W) + i] = (itr != t->itr) ? (itr * 0x03d3fc * t->color) : 0x000000;
 			i++;
 		}
 		j++;
 	}
+	return NULL;
 }
